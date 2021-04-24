@@ -12,6 +12,7 @@ Route::prefix('/v1')->group(function () {
         Route::get('/user', function (Request $request) { return $request->user(); });
         Route::resource('collections', CollectionController::class);
         Route::resource('collections.todos', CollectionTodoController::class);
+        Route::get('/collections/{collection}/todos/search/{search}', [CollectionTodoController::class, 'search']);
         Route::resource('todos', TodoController::class);
     });
 });

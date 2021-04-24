@@ -62,8 +62,9 @@ class CollectionTodoController extends Controller
         return new TodoResource($todo);
     }
 
-    public function search($search)
+    public function search($collection, $search)
     {
-        //
+        $res = Todo::where('title', 'like', '%'.$search.'%')->orWhere('description', 'like', '%'.$search.'%')->get();
+        return TodoResource::collection($res);
     }
 }
