@@ -39,21 +39,16 @@ class CollectionTodoController extends Controller
         return new TodoResource($new_todo);
     }
 
-    public function update(Request $request, $collection, Todo $todo)
+    public function update(Request $request, Collection $collection, Todo $todo)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'nullable'
-        ]);
-
-        $update_todo = Todo::create([
-            'collection_id' => $collection,
-            'user_id' => $request->user()->id,
-            'title' => $request->title,
-            'description' => $request->description
-        ]);
-
-        return new TodoResource($update_todo);
+        // dd(Todo::find($todo));
+        if ($request->user()->id !== $todo->user_id) {
+            return response()->json(['error' => 'You can only edit your own todos.'], 403);
+        }
+    
+        $todo->update($request->only(['title', 'description']));
+    
+        return new TodoResource($todo);
     }
 
     public function destroy($collection, Todo $todo)
