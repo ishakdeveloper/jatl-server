@@ -22,7 +22,8 @@ class TodoResource extends JsonResource
             'description' => $this->description,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'collection' => $this->collection
+            'collection' => $this->collection,
+            'user' => $this->user
         ];
     }
 }

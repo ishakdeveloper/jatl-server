@@ -11,7 +11,8 @@ class CollectionController extends Controller
 {
     public function index(Collection $collection)
     {
-        return CollectionResource::collection(Collection::paginate(20));
+        $collection = Collection::where('user_id', auth()->user()->id)->paginate(20);
+        return CollectionResource::collection($collection);
     }
 
     public function show(Collection $collection)
@@ -49,8 +50,8 @@ class CollectionController extends Controller
 
     public function destroy(Collection $collection)
     {
-        $res = $collection->delete();
-        return new CollectionResource($res);
+        $collection->delete();
+        return new CollectionResource($collection);
     }
 
     public function search($search)

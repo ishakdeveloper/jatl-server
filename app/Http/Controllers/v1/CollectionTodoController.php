@@ -13,7 +13,7 @@ class CollectionTodoController extends Controller
 
     public function index($collection)
     {
-        $todos = Todo::where('collection_id', $collection)->get();
+        $todos = Todo::where('collection_id', $collection)->where('user_id', auth()->user()->id)->get();
         return TodoResource::collection($todos);
     }
 

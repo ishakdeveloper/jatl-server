@@ -22,6 +22,7 @@ class CollectionResource extends JsonResource
             'picture' => $this->picture,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'todos' => $this->todos,
             'user' => $this->user
         ];
     }
